@@ -1,0 +1,82 @@
+{
+  "info": {
+    "name": "Talaa v1.7 \u2014 APIs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "FX Quote",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"source_currency\":\"USD\",\"target_currency\":\"GHS\",\"amount\":100}"
+        },
+        "url": "{{API}}/v1/quotes/fx"
+      }
+    },
+    {
+      "name": "KYC Start",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"full_name\":\"Ameery\",\"id_type\":\"passport\",\"id_number\":\"P123456\"}"
+        },
+        "url": "{{API}}/v1/kyc/start"
+      }
+    },
+    {
+      "name": "KYC Upload",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"kyc_id\":1,\"kind\":\"passport\",\"ref\":\"https://s3.example/talaa/passport.png\"}"
+        },
+        "url": "{{API}}/v1/kyc/upload"
+      }
+    },
+    {
+      "name": "Stripe Webhook (dev)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"type\":\"payment_intent.succeeded\",\"data\":{\"object\":{\"id\":\"pi_test\",\"metadata\":{\"settlement_ref\":\"tr_intl_x\"}}}}"
+        },
+        "url": "{{API}}/v1/webhooks/stripe"
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "API",
+      "value": "http://localhost:3000"
+    }
+  ]
+}

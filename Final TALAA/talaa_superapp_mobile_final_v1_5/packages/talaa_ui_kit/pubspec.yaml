@@ -1,0 +1,13 @@
+name: talaa_ui_kit
+description: Talaa UI Kit — combined Royal Blue + Indigo + soft violet, light/dark, no glow.
+version: 0.3.0
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/talaa_logo.png
+    - assets/talaa_logo.svg

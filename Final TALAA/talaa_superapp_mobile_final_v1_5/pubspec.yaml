@@ -1,0 +1,16 @@
+name: talaa_superapp_final
+description: Talaa SuperApp — combined palette, light/dark, no glow, chats/insights/assistant.
+version: 1.5.0+1
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.2.1
+  mobile_scanner: ^6.0.2
+  talaa_ui_kit:
+    path: ./packages/talaa_ui_kit
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/talaa_logo.png

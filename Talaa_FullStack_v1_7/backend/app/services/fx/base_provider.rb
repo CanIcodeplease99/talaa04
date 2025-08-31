@@ -1,0 +1,1 @@
+module FX; class BaseProvider; def quote(source:, target:, amount:); raise NotImplementedError; end; def trade_and_payout(source_currency:, source_amount:, target_currency:, recipient_msisdn:, recipient_network:, reference:); raise NotImplementedError; end; end; end
