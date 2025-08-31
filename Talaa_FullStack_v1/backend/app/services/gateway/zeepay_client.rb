@@ -1,0 +1,1 @@
+module Gateway; class ZeepayClient < BaseClient; def initialize; super(base:ENV['ZEEPAY_BASE'], key:ENV['ZEEPAY_KEY']); end; def payout_momo(msisdn:, network:, amount_cents:, reference:); {ok:false, status:'failed', raw:{}}; end; def health; 'degraded'; end; end; end

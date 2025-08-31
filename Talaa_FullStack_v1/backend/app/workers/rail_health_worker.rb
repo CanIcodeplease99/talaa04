@@ -1,0 +1,1 @@
+class RailHealthWorker; include Sidekiq::Worker; def perform; {"nsano"=>Gateway::NsanoClient.new,"zeepay"=>Gateway::ZeepayClient.new,"hubtel"=>Gateway::HubtelClient.new}.each do |n,c|; st=(c.health rescue "down"); Rails.cache.write("rail:gh:#{n}:status", st, expires_in:120); end; end; end

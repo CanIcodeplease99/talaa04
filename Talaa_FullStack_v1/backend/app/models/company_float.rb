@@ -1,0 +1,1 @@
+class CompanyFloat < ApplicationRecord; end

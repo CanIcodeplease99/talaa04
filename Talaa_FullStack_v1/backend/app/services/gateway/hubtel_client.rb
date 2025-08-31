@@ -1,0 +1,1 @@
+module Gateway; class HubtelClient < BaseClient; def initialize; super(base:ENV['HUBTEL_BASE'], key:ENV['HUBTEL_KEY']); end; def payout_momo(msisdn:, network:, amount_cents:, reference:); {ok:false, status:'failed', raw:{}}; end; def health; 'down'; end; end; end

@@ -1,0 +1,1 @@
+class SettlementsController < ApplicationController; def show; s=Settlement.find_by(transfer_id:params[:id]); return render(json:{error:'Not found'}, status:404) unless s; render json:{id:s.transfer_id,status:s.status,funding_status:s.funding_status,expected_settlement_at:s.expected_settlement_at}; end; end

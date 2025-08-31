@@ -1,0 +1,1 @@
+module Gateway; class NsanoClient < BaseClient; def initialize; super(base:ENV['NSANO_BASE'], key:ENV['NSANO_KEY']); end; def payout_momo(msisdn:, network:, amount_cents:, reference:); {ok:true, status:'accepted', raw:{}}; end; def health; 'healthy'; end; end; end

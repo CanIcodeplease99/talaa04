@@ -1,0 +1,10 @@
+class FundingStripe
+  def self.create_intent(amount_cents:, currency:, settlement_ref:)
+    Stripe::PaymentIntent.create({
+      amount: amount_cents,
+      currency: currency,
+      automatic_payment_methods: {enabled: true},
+      metadata: { settlement_ref: settlement_ref }
+    }).to_hash.slice(:id, :client_secret)
+  end
+end

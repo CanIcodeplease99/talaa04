@@ -1,0 +1,1 @@
+{"info": {"name": "Talaa v1"}, "item": [{"name": "FX Quote", "request": {"method": "POST", "url": "{{API}}/v1/quotes/fx"}}]}

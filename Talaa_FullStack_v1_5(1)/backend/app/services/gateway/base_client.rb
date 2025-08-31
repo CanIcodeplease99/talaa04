@@ -1,0 +1,10 @@
+require 'faraday'; require 'oj'
+module Gateway
+  class BaseClient
+    def initialize(base:)
+      @http=Faraday.new(url:base){|f| f.request :json; f.response :json, content_type:/json|plain/; f.adapter Faraday.default_adapter }
+    end
+    def post(path, body={}, headers={}); @http.post(path, body, {'Content-Type'=>'application/json'}.merge(headers)); end
+    def get(path, params={}, headers={}); @http.get(path, params, headers); end
+  end
+end

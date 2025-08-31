@@ -1,0 +1,1 @@
+class CardsController < ApplicationController; def virtual; render json:{id:'vcard_123', last4:'4242', brand:'Visa', status:'issued'}; end; def tokenize; render json:{wallet:'apple', status:'provisioned', pass_id:'pass_abc'}; end; end

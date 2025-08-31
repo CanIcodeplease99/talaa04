@@ -1,0 +1,1 @@
+class FundingIntent < ApplicationRecord; end

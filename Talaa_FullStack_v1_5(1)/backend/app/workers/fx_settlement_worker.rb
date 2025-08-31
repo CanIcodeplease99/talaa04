@@ -1,0 +1,19 @@
+class FxSettlementWorker
+  include Sidekiq::Worker
+  def perform(transfer_id, meta)
+    s=Settlement.find_by(transfer_id:transfer_id); return unless s
+    return unless s.funding_status=='cleared'
+    fx = FX::Orchestrator.new(provider: meta['provider'] || ENV.fetch('FX_PROVIDER','wise'))
+    trade = fx.trade_and_payout(source_currency: meta['src_currency'], source_amount: meta['src_amount'],
+                                target_currency: 'GHS', recipient_msisdn: meta['msisdn'],
+                                recipient_network: meta['network'], reference: s.transfer_id)
+    if trade[:ok]
+      s.update!(status:'sent', meta: s.meta.merge(fx_ref: trade[:fx_ref], payout_ref: trade[:payout_ref]))
+      Metrics.inc(:fx_trades_ok)
+    else
+      s.update!(status:'failed', last_error: trade[:error] || 'fx_failed')
+      Metrics.inc(:fx_trades_failed)
+      raise s.last_error
+    end
+  end
+end

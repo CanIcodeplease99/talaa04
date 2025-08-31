@@ -1,0 +1,96 @@
+{
+  "info": {
+    "name": "Talaa v1.5 \u2014 APIs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Rails Health",
+      "request": {
+        "method": "GET",
+        "url": "{{API}}/v1/rails/health"
+      }
+    },
+    {
+      "name": "FX Quote",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"source_currency\":\"USD\",\"target_currency\":\"GHS\",\"amount\":100}"
+        },
+        "url": "{{API}}/v1/quotes/fx"
+      }
+    },
+    {
+      "name": "Transfer (Domestic)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"amount\":25,\"speed\":\"instant\"}"
+        },
+        "url": "{{API}}/v1/transfers"
+      }
+    },
+    {
+      "name": "Transfer (International \u2192 funding intent)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"source_currency\":\"USD\",\"amount\":100,\"rate\":14.6,\"fee\":0.9}"
+        },
+        "url": "{{API}}/v1/transfers/intl"
+      }
+    },
+    {
+      "name": "Stripe Webhook (dev)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"type\":\"payment_intent.succeeded\",\"data\":{\"object\":{\"id\":\"pi_test\",\"metadata\":{\"settlement_ref\":\"tr_intl_x\"}}}}"
+        },
+        "url": "{{API}}/v1/webhooks/stripe"
+      }
+    },
+    {
+      "name": "Metrics",
+      "request": {
+        "method": "GET",
+        "url": "{{API}}/metrics"
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "API",
+      "value": "http://localhost:3000"
+    }
+  ]
+}

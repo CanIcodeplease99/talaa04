@@ -1,0 +1,1 @@
+class RailsController < ApplicationController; def health; names=%w[zeepay hubtel]; render json:{gh:names.map{|n|{name:n,status:Rails.cache.fetch("rail:gh:#{n}:status"){"unknown"}}], at:Time.now}; end; end

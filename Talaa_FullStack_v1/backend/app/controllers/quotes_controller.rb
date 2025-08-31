@@ -1,0 +1,1 @@
+class QuotesController < ApplicationController; def fx; src=(params[:source_currency]||'USD').upcase; tgt=(params[:target_currency]||'GHS').upcase; amt=params[:amount].to_f; rate=14.50; fee=(amt*0.01).round(2); received=((amt-fee)*rate).round(2); render json:{rate:rate, fee:fee, received:received, lock_expires_at: Time.now+60}; end; end

@@ -1,0 +1,31 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+class TalaaApi {
+  final String base;
+  TalaaApi(this.base);
+
+  Future<Map<String, dynamic>> fxQuote({required String source, String target='GHS', required double amount}) async {
+    final r = await http.post(Uri.parse('$base/v1/quotes/fx'),
+      headers:{'Content-Type':'application/json'},
+      body: jsonEncode({'source_currency': source, 'target_currency': target, 'amount': amount}));
+    if(r.statusCode>=200 && r.statusCode<300) return jsonDecode(r.body);
+    throw Exception('FX quote failed: ${r.statusCode} ${r.body}');
+  }
+
+  Future<Map<String, dynamic>> sendDomestic({required double amount, required bool instant}) async {
+    final r = await http.post(Uri.parse('$base/v1/transfers'),
+      headers:{'Content-Type':'application/json'},
+      body: jsonEncode({'amount': amount, 'speed': instant ? 'instant':'standard'}));
+    if(r.statusCode>=200 && r.statusCode<300) return jsonDecode(r.body);
+    throw Exception('Transfer failed: ${r.statusCode} ${r.body}');
+  }
+
+  Future<Map<String, dynamic>> sendInternational({required String source, required double amount, required double rate, required double fee}) async {
+    final r = await http.post(Uri.parse('$base/v1/transfers/intl'),
+      headers:{'Content-Type':'application/json'},
+      body: jsonEncode({'source_currency': source, 'amount': amount, 'rate': rate, 'fee': fee}));
+    if(r.statusCode>=200 && r.statusCode<300) return jsonDecode(r.body);
+    throw Exception('Intl transfer failed: ${r.statusCode} ${r.body}');
+  }
+}

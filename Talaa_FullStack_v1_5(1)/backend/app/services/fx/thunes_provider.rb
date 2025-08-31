@@ -1,0 +1,13 @@
+require 'securerandom'
+module FX
+  class ThunesProvider < BaseProvider
+    def initialize; @base=ENV['THUNES_BASE']; @key=ENV['THUNES_KEY']; end
+    def quote(source:, target:, amount:)
+      rate = 14.55; fee = (amount*0.012).round(2); received=((amount-fee)*rate).round(2)
+      {provider:'thunes', rate:rate, fee:fee, received:received}
+    end
+    def trade_and_payout(source_currency:, source_amount:, target_currency:, recipient_msisdn:, recipient_network:, reference:)
+      { ok:true, fx_ref:"th_#{SecureRandom.hex(4)}", payout_ref:"gh_#{SecureRandom.hex(4)}" }
+    end
+  end
+end
