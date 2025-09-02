@@ -1,0 +1,53 @@
+Project: Talaa (Fintech Super-App) — Production-accurate Prototype
+
+Use `openapi.yaml` + `tokens.json` to generate the client. Base URL from env: API_BASE.
+
+UI/UX REQUIREMENTS (light & dark; Royal Blue → Indigo; subtle soft-violet accents):
+- General: rounded 16pt cards; 44pt min tap targets; iOS-safe areas; empty states with tasteful illustration placeholders; pull-to-refresh.
+- Motion: Send button slow pulse (1200ms); card shimmer on Home (1800ms) only on first load; bottom-tab fade when changing tabs; Confirm modal slides up 320ms.
+- Accessibility: large text friendly; high-contrast mode variant; content labels on all icons.
+- Privacy: amounts hidden until FaceID; small “Hide” eye icon in header toggles local preference.
+
+SCREENS
+1) Home
+   - Top bar: left brand wordmark, right QR icon + notifications dot.
+   - Balance card: blurred by default with “Unlock with FaceID” CTA; once unlocked shows available + pending.
+   - Primary actions row: Send (primary filled), QR Pay (outline), Split (outline).
+   - Fraud banner (dismissible): “Never share your password/OTP.”
+   - Activity list: items show avatar, name/@handle, amount right-aligned, status chip [Completed | Secured | Finalizing].
+2) Send
+   - Fields: To (@handle / phone), Amount keypad, Note.
+   - Continue → goes to SendConfirm. No instant/standard toggle here.
+3) SendConfirm
+   - Summary: payer → payee, fee line, arrival “Instant” label.
+   - Speed toggle appears here only: [Standard] [Instant] with Instant glowing green when selected.
+   - Confirm button → on success show “Sent Instantly • Protected” and return to Home.
+4) Discover (WeChat-style hub)
+   - Grid: QR Pay, Airtime, Bills, Merchants, Events, Assistant.
+   - Merchants carousel with 3 cards (local images mocked).
+5) Assistant (Lumi)
+   - Chat UI; sample chip prompts: “Spending this week”, “Nearby deals”.
+   - Example response: groceries spend chart + merchant suggestions.
+6) SocialThread
+   - Private thread per payment; comments with emoji reactions; image/meme attachments; long-press to react.
+   - No public feed; only participants see the thread.
+7) BusinessOnboarding (KYB)
+   - Step 1 Legal (name/type), Step 2 Registration (reg #/industry), Step 3 Contacts, Step 4 Docs (uploads by URL string), Review & Submit.
+   - Show status badges: Pending / Approved / Rejected.
+8) CryptoBuy
+   - Amount in USD; asset selector (USDC/BTC/ETH); Quote then Buy; show fee/units; educational disclaimer.
+9) AddMoney → Bank
+   - Start link (provider dropdown placeholder), Finish link, Create debit intent.
+10) DirectDeposit
+   - Show Account Number, Routing, Sort Code, IBAN, Reference; Copy buttons; “Share details” action.
+11) Security
+   - Freeze/Unfreeze buttons; Report Fraud (textarea + submit).
+
+IMPLEMENTATION NOTES
+- Only call endpoints in openapi.yaml. Others mock.
+- Persist: banner dismissed, last-unlocked state, recent recipients, and selected instant/standard preference.
+- Folder structure: screens/, widgets/, services/, theme/, api/ (generated from OpenAPI).
+
+Deliverables
+- Buildable project with typed OpenAPI client, tokens-based theming, and the above screens/flows wired.
+- README that lists where each API call lives.
